@@ -15,4 +15,4 @@ Elaboración de una calculadora funcional de números complejos
     5. Módulo
     6. Conjugado
     7. Conversión entre representaciones polar y cartesiano
-    8. Retornar la fase de un número complejo. *FALTANTE   
+    8. Retornar la fase de un número complejo. *FALTANTE
