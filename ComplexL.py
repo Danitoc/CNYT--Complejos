@@ -148,6 +148,16 @@ def VecEscalar(e, v):
     return vec
 
 
-'''def SumaMatrices(m1, m2):'''
+def SumaMatrices(m1, m2):
+    Mres = list()
+    for i in range(0, len(m1)):
+        vec = list()
+        for j in range(0, len(m1)):
+            vec.append(SumaComplejos(m1[i][j], m2[i][j]))
+        Mres.append(vec)
+    return Mres
 
 
+'''mat1 = [[(1, 2), (3, 4)], [(1, 9), (6, 5)]]
+mat2 = [[(1, 1), (1, 2)], [(1, 3), [1, 5]]]
+print(SumaMatrices(mat1, mat2))'''
