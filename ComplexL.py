@@ -104,7 +104,7 @@ def fase(c):
 #                               Operaciones adicionales
 
 
-def InvesoComplejo(c):
+def InvesoAditivoComplejo(c):
     '''
     El parámetro c es un número complejo
     Función que calcula el inverso aditivo de un número complejo
@@ -158,6 +158,19 @@ def SumaMatrices(m1, m2):
     return Mres
 
 
-'''mat1 = [[(1, 2), (3, 4)], [(1, 9), (6, 5)]]
+def InversaAditMat(mat):
+    Mres = list()
+    for i in range(0, len(mat)):
+        vec = list()
+        for j in range(0, len(mat)):
+            vec.append(InvesoAditivoComplejo(mat[i][j]))
+        Mres.append(vec)
+    return Mres
+
+
+'''mat1 = [[(1, -2), (3, 4)], [(1, 9), (6, 5)]]
 mat2 = [[(1, 1), (1, 2)], [(1, 3), [1, 5]]]
-print(SumaMatrices(mat1, mat2))'''
+print(SumaMatrices(mat1, mat2))
+print(mat1)
+print(InversaAditMat(mat1))
+print(SumaMatrices(mat1, InversaAditMat(mat1)))'''

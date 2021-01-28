@@ -23,7 +23,7 @@ Consta de una libreria con funciones basicas para el manejo de números complejo
 - Inverso (aditivo) de un vector complejo.
 - Multiplicación de un escalar por un vector complejo.
 - Adición de matrices complejas.
-- Inversa (aditiva) de una matriz compleja. FALTANTE
+- Inversa (aditiva) de una matriz compleja.
 - Multiplicación de un escalar por una matriz compleja. FALTANTE
 - Transpuesta de una matriz/vector. FALTANTE
 - Conjugada de una matriz/vector. FALTANTE
