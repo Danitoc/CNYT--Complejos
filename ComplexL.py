@@ -133,7 +133,7 @@ def InversoAditivoVec(v):
     '''
     vec = list()
     for i in range(0, len(v)):
-        vec.append(InvesoComplejo(v[i]))
+        vec.append(InvesoAditivoComplejo(v[i]))
     return vec
 
 
@@ -168,7 +168,86 @@ def InversaAditMat(mat):
     return Mres
 
 
-'''mat1 = [[(1, -2), (3, 4)], [(1, 9), (6, 5)]]
+def EscalarPorMatriz(c, mat):
+    resu = list()
+    for i in range(0, len(mat)):
+        vec = list()
+        for j in range(0, len(mat)):
+            vec.append(MultiplicacionComplejos(c, mat[i][j]))
+        resu.append(vec)
+    return resu
+
+
+def TrasnpuestaMat(mat):
+    resu = list()
+    for i in range(0, len(mat)):
+        vec = list()
+        for j in range(0, len(mat)):
+            vec.append(mat[j][i])
+        resu.append(vec)
+    return resu
+
+
+def ConjugadaVector(v):
+    vec = list()
+    for i in v:
+        vec.append(ConjugadoComplejos(i))
+    return vec
+
+
+def ConjugadaMatriz(m):
+    mat = list()
+    for i in range(0, len(m)):
+        mat.append(ConjugadaVector(m[i]))
+    return mat
+
+
+def AdjuntaVector(v):
+    vec = list()
+    vec.append(ConjugadaVector(v))
+    return vec
+
+
+def AdjuntaMatTransConj(m):
+    mat = list()
+    mat.append(TrasnpuestaMat(ConjugadaMatriz(m)))
+    return mat
+
+
+def AdjuntaMatConjTrans(m):
+    mat = list()
+    mat.append(ConjugadaMatriz(TrasnpuestaMat(m)))
+    return mat
+
+
+def MultiplicacionMatrices(m1, m2):
+    mat = list()
+    for i in range(0, len(m1)):
+        fila = list()
+        for j in range(len(mat2[0])):
+            complejo = (0, 0)
+            for k in range(len(m2)):
+                mult = MultiplicacionComplejos(m1[k][i], m2[j][k])
+                complejo = SumaComplejos(mult, complejo)
+            fila.append(complejo)
+        mat.append(fila)
+    return mat
+
+
+mat1 = [[(3, 2), (1, 0), (4, -1)], [(0, 0), (4, 2), (0, 0)], [(5, -6), (0, 1), (4, 0)]]
+mat2 = [[(5, 0), (0, 0), (7, -4)], [(2, -1), (4, 5), (2, 7)], [(6, -4), (2, 0), (0, 0)]]
+print(MultiplicacionMatrices(mat1, mat2))
+'''mat3 = [[(1, -1), (2, 2)], [(3, 0), (4, 1)]]
+print(AdjuntaMatConjTrans(mat3))
+print(AdjuntaMatConjTrans(mat3))
+print(ConjugadaMatriz(mat3))
+vec = [(1, -3), (2, 1)]
+print(ConjugadaVector(vec))
+print(TrasnpuestaMat(mat1))
+print(MultiplicacionComplejos((0,2), (4, 1)))
+mat1 = [[(1, -2), (3, 4)], [(1, 9), (6, 5)]]
+escalar = (0, 2)
+print(EscalarPorMatriz(escalar, mat3))
 mat2 = [[(1, 1), (1, 2)], [(1, 3), [1, 5]]]
 print(SumaMatrices(mat1, mat2))
 print(mat1)
