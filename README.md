@@ -31,14 +31,14 @@ Consta de una libreria con funciones basicas para el manejo de números complejo
 - Adjunta (daga) de un vector.
 - Adjunta (daga) de una matriz (metodo traspuesta luego conjugada). 
 - Adjunta (daga) de una matriz (metodo conjugada luego traspuesta). 
-- Producto de dos matrices (de tamaños compatibles). FALTANTE
+- Producto de dos matrices (de tamaños compatibles).
 - Función para calcular la "acción" de una matriz sobre un vector. FALTANTE
-- Producto interno de dos vectores. FALTANTE
-- Norma de un vector. FALTANTE
-- Distancia entre dos vectores. FALTANTE
-- Revisar si una matriz es unitaria. FALTANTE
-- Revisar si una matriz es Hermitiana. FALTANTE
-- Producto tensor de dos matrices/vectores. FALTANTE
+- Producto interno de dos vectores.
+- Norma de un vector.
+- Distancia entre dos vectores.
+- Revisar si una matriz es unitaria.
+- Revisar si una matriz es Hermitiana.
+- Producto tensor de dos matrices/vectores.
 
 ## ¿Cómo hacer uso de la libreria de números complejos?
 
