@@ -115,8 +115,19 @@ def InvesoAditivoComplejo(c):
 def MultiplicacionVectores(v1, v2):
     com = (0, 0)
     for i in range(0, len(v1)):
-        com = SumaComplejos(com, MultiplicacionVectores(v1[i], v2[i]))
+        com = SumaComplejos(com, MultiplicacionComplejos(v1[i], v2[i]))
     return com
+
+
+def RestaVectores(v1, v2):
+    '''
+    Los parámetros v1 y v2 son vectores de mismo tamaño compuestos por números complejos
+    Función que suma vectores
+    '''
+    vec = list()
+    for i in range(0, len(v1)):
+        vec.append(RestaComplejos(v1[i], v2[i]))
+    return vec
 
 
 #                               Operaciones para vectores y matrices complejas
@@ -130,17 +141,6 @@ def SumaVectores(v1, v2):
     vec = list()
     for i in range(0, len(v1)):
         vec.append(SumaComplejos(v1[i], v2[i]))
-    return vec
-
-
-def RestaVectores(v1, v2):
-    '''
-    Los parámetros v1 y v2 son vectores de mismo tamaño compuestos por números complejos
-    Función que suma vectores
-    '''
-    vec = list()
-    for i in range(0, len(v1)):
-        vec.append(RestaVectores(v1[i], v2[i]))
     return vec
 
 
@@ -196,13 +196,11 @@ def EscalarPorMatriz(c, mat):
     return resu
 
 
-def TrasnpuestaMat(mat):
-    resu = list()
+def TraspuestaMat(mat):
+    resu = [[0] * len(mat) for i in range(0, len(mat[0]))]
     for i in range(0, len(mat)):
-        vec = list()
-        for j in range(0, len(mat)):
-            vec.append(mat[j][i])
-        resu.append(vec)
+        for j in range(0, len(mat[i])):
+            resu[j][i] = mat[i][j]
     return resu
 
 
@@ -221,17 +219,15 @@ def ConjugadaMatriz(m):
 
 
 def AdjuntaVector(v):
-    vec = list()
-    vec.append(ConjugadaVector(v))
-    return vec
+    return ConjugadaVector(v)
 
 
 def AdjuntaMatTransConj(m):
-    return TrasnpuestaMat(ConjugadaMatriz(m))
+    return TraspuestaMat(ConjugadaMatriz(m))
 
 
 def AdjuntaMatConjTrans(m):
-    return ConjugadaMatriz(TrasnpuestaMat(m))
+    return ConjugadaMatriz(TraspuestaMat(m))
 
 
 def MultiplicacionMatrices(m1, m2):
@@ -245,11 +241,14 @@ def MultiplicacionMatrices(m1, m2):
                 complejo = SumaComplejos(mult, complejo)
             fila.append(complejo)
         mat.append(fila)
-    return TrasnpuestaMat(mat)
+    return TraspuestaMat(mat)
 
 
 def ProductoInternoVectores(v1, v2):
     vec = AdjuntaVector(v1)
+    print(vec)
+    print(v2)
+    MultiplicacionVectores(vec, v2)
     return MultiplicacionVectores(vec, v2)
 
 
@@ -264,11 +263,12 @@ def DistanciaVectores(v1, v2):
 
 def PruebaSiUnitaria(m):
     adjunta = AdjuntaMatConjTrans(m)
-    mat = MultiplicacionMatrices(adjunta, m)
+    mat = MultiplicacionMatrices(m, adjunta)
+    print(mat)
     for i in range(0, len(m)):
         for j in range(0, len(m[0])):
             if i == j and (mat[0] != 1 or mat[1] != 0):
-                return False
+                return True
             elif i != j and (mat[0] != 0 or mat[1] != 0):
                 return False
     return True
@@ -302,39 +302,5 @@ def ProductoTensorMatrices(m1, m2):
     print(matTensor)
     for i in range(0, mr):
         for j in range(0, nr):
-            matTensor[i][j] = MultiplicacionComplejos(m1[i//n][j//nn], m2[i % n][j % n])
+            matTensor[i][j] = MultiplicacionComplejos(m1[i // n][j // nn], m2[i % n][j % n])
     return matTensor
-
-
-vec1 = [(4, 0), (-3, 0)]
-vec2 = [(-1, 0), (2, 0), (5, 0)]
-mat11 = [[(3, 2), (0, 0), (2, 0)], [(5, -1), (12, 0), (4, 4)], [(0, 2), (6, -3), (9, 3)]]
-mat22 = [[(1, 0), (10, 2), (0, 0)], [(3, 4), (6, 0), (1, 0)], [(5, -7), (2, 5), (2, 9)]]
-mat1 = [[(3, 2), (1, 0), (4, -1)], [(0, 0), (4, 2), (0, 0)], [(5, -6), (0, 1), (4, 0)]]
-mat2 = [[(5, 0), (0, 0), (7, -4)], [(2, -1), (4, 5), (2, 7)], [(6, -4), (2, 0), (0, 0)]]
-mat3 = [[(3, 6), (0, 0)], [(9, -5), (1, 1)]]
-mat4 = [[(5, 7), (2, 4)], [(9, 9), (3, -15)]]
-mat5 = [[(5, 0), (4, -5), (6, 16)], [(4, 5), (13, 0), (7, 0)], [(6, -16), (7, 0), (-2.1, 0)]]
-print(mat5)
-print(PruebaSiHermitiana(mat5))
-print(MultiplicacionMatrices(mat1, mat2))
-print(MultiplicacionMatrices(mat3, mat4))
-print(ProductoTensorVectores(vec2, vec1))
-print(ProductoTensorVectores([(-1, 1), (2, -1), (5, 1)], [(4, 1), (3, 0)]))
-print(ProductoTensorMatrices(mat11, mat22))
-'''mat3 = [[(1, -1), (2, 2)], [(3, 0), (4, 1)]]
-print(AdjuntaMatConjTrans(mat3))
-print(AdjuntaMatConjTrans(mat3))
-print(ConjugadaMatriz(mat3))
-vec = [(1, -3), (2, 1)]
-print(ConjugadaVector(vec))
-print(TrasnpuestaMat(mat1))
-print(MultiplicacionComplejos((0,2), (4, 1)))
-mat1 = [[(1, -2), (3, 4)], [(1, 9), (6, 5)]]
-escalar = (0, 2)
-print(EscalarPorMatriz(escalar, mat3))
-mat2 = [[(1, 1), (1, 2)], [(1, 3), [1, 5]]]
-print(SumaMatrices(mat1, mat2))
-print(mat1)
-print(InversaAditMat(mat1))
-print(SumaMatrices(mat1, InversaAditMat(mat1)))'''
